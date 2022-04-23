@@ -24,25 +24,14 @@ class SplayTree:
         if not node:
             #stdout.write("NOVO ARTIGO INSERIDO\n")
             return newNode
-
-        node = self.splaying(node, newNode.name)
-
-        if node is not None:
-            if node.name == newNode.name:
-                #stdout.write("ARTIGO JA EXISTENTE\n")
-                return node
-
-            elif node.name > newNode.name:
-                newNode.right = node
-                newNode.left = node.left
-                node.left = None
-
-            else:
-                newNode.left = node
-                newNode.right = node.right
-                node.right = None
-            #stdout.write("NOVO ARTIGO INSERIDO\n")
-        return newNode
+        elif node.name > newNode.name:
+            node.left = self.insert(node.left, newNode)
+        elif node.name < newNode.name:
+            node.right = self.insert(node.right, newNode)
+        elif node.name == newNode.name:
+            #stdout.write("ARTIGO JA EXISTENTE\n")
+            return node
+        return node
 
     def splaying(self, node, newName):
         if not node or node.name == newName:
@@ -114,19 +103,21 @@ class SplayTree:
 
 
 def main():
-    f = open("resultsMode1.txt", "a")
+    f = open("resultsMode2.txt", "a")
     for i in range(3):
-        stdin = open("Modo1.txt", "r")
+        stdin = open("input - Splay.txt", "r")
         a = SplayTree()
         arvore = None
         inp = stdin.readline().rstrip().split()
-        inputTime = 0
-        start = perf_counter()
+        start = 0
         while inp[0] != "FIM":
             if inp[0] == "ARTIGO":
                 arvore = a.insert(arvore, Node(inp[1], inp[2], inp[3]))
+                arvore = a.splaying(arvore, inp[1])
             elif inp[0] == "CONSULTA":
+                start -= perf_counter()
                 arvore = a.search(arvore, inp[1])
+                start += perf_counter()
                 if arvore.name == inp[1]:
                     #stdout.write(str(arvore) + "\n")
                     #stdout.write("FIM\n")
@@ -152,11 +143,10 @@ def main():
             else:
                 #stdout.write("INVALID INPUT\n")
                 pass
-            inputTime -= perf_counter()
             inp = stdin.readline().rstrip().split()
-            inputTime += perf_counter()
+            
         end = perf_counter()
-        f.write(str(end-start-inputTime)+ "\n")
+        f.write(str(end-start)+ "\n")
 
 
 if __name__ == '__main__':
