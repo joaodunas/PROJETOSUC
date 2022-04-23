@@ -1,0 +1,68 @@
+'''
+            rasterOrdenado = ordenar(raster)
+            if len(rasterOrdenado) % 2 == 0:
+                res = (rasterOrdenado[int(len(rasterOrdenado)/2)-1]+ rasterOrdenado[int(len(rasterOrdenado)/2)]) / 2
+                stdout.write(str(int(res))+"\n")
+            else:
+                stdout.write(str(rasterOrdenado[int(len(rasterOrdenado)/2)])+ "\n")
+            '''
+
+            
+'''
+def ordenar(matrix):
+    matrix1d =[]
+    if isinstance(matrix[0], list):
+        for i in matrix:
+            for l in i:
+                matrix1d.append(l)
+    else:
+        matrix1d = matrix
+
+    result = []
+    
+    while len(matrix1d) >0:
+        minVal = matrix1d[0]
+        for i in matrix1d:
+            if minVal >= i:
+                minVal = i
+
+        matrix1d.remove(minVal)
+        result.append(minVal)
+    return result
+
+
+:::::::::::::::::::::::
+                for s in range(0, len(rasterUni)):
+                    buf = rasterUni[s]
+                    k = s - 1
+                    while k >= 0 and buf < rasterUni[k]:
+                        rasterUni[k + 1] = rasterUni[k]
+                        k -= 1
+
+                    rasterUni[k+1] = buf
+
+'''
+def quick_sort(raster, low = 0, high = None):
+    if high is None:
+        high = len(raster)
+    if (high -low <= 1):
+        return 
+    #median of three
+    pivotArray = []
+    pivotArray.append(raster[low])
+    pivotArray.append(raster[high-1])
+    pivotArray.append(raster[(low+high)//2])
+    sorted(pivotArray)   
+    pivot = pivotArray[1]
+    split = low
+    for i in range(low, high-1):
+        if (raster[i] < pivot):
+            buff = raster[i]
+            raster[i] = raster[split]
+            raster[split] = buff
+            split += 1
+    buff = raster[high-1]
+    raster[high-1] = raster[split]
+    quick_sort(raster, low, split)
+    quick_sort(raster, split+1, high)
+    return 

@@ -18,24 +18,6 @@ def percentil(matrix, value):
     return str(val) + " "
 
 
-def mediana(matrix):
-    buff = matrix.copy()
-    buff2 = []
-    half = len(matrix) // 2
-    i = 0
-    minimum = min(buff)
-
-    while i != half:
-        buff.remove(minimum)
-        buff2.append(minimum)
-        minimum = min(buff)
-        i += 1
-
-    if (len(matrix) % 2) == 0:
-        return (minimum + buff2[-1]) // 2
-    else:
-        return minimum
-
 
 def main():
     inp = readInput()
