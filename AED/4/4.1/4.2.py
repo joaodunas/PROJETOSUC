@@ -10,10 +10,10 @@ def percentil(matrix, value):
     n = 0
 
     lenMat = len(matrix)
-    i = 0
-    while i < lenMat and matrix[i] < value:
-        n += 1
-        i += 1
+    for i in range(lenMat):
+        if (matrix[i] >= value):
+            break
+        n += 1 
     val = int(n / lenMat * 100)
     return str(val) + " "
 
@@ -39,18 +39,15 @@ def main():
                         for l in range(M):
                             rasterUni.append(int(inp2[l]))
 
-                #bubble sort
+               #insertion sort
+                for i in range(1, len(rasterUni)):
+                    tmp = rasterUni[i]
+                    j = i
+                    while j > 0 and tmp < rasterUni[j-1]:
+                        rasterUni[j] = rasterUni[j-1]
+                        j -= 1
+                    rasterUni[j] = tmp
 
-                for i in range(len(rasterUni)):
-                    h = len(rasterUni)-1-i
-                    c = 1
-
-                    while c <= h:
-                        if rasterUni[c] < rasterUni[c-1]:
-                            buffer = rasterUni[c]
-                            rasterUni[c] = rasterUni[c-1]
-                            rasterUni[c-1] = buffer
-                        c += 1
 
                 stdout.write("RASTER GUARDADO\n")
 

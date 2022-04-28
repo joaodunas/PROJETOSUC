@@ -66,3 +66,18 @@ def quick_sort(raster, low = 0, high = None):
     quick_sort(raster, low, split)
     quick_sort(raster, split+1, high)
     return 
+
+
+
+     #bubble sort
+
+                for i in range(len(rasterUni)):
+                    h = len(rasterUni)-1-i
+                    c = 1
+
+                    while c <= h:
+                        if rasterUni[c] < rasterUni[c-1]:
+                            buffer = rasterUni[c]
+                            rasterUni[c] = rasterUni[c-1]
+                            rasterUni[c-1] = buffer
+                        c += 1
