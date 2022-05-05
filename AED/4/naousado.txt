@@ -81,3 +81,44 @@ def quick_sort(raster, low = 0, high = None):
                             rasterUni[c] = rasterUni[c-1]
                             rasterUni[c-1] = buffer
                         c += 1
+
+'''
+def quicksort(raster, low=0, high=None):
+    if high is None:
+        high = len(raster)
+    while(len(raster) > 30):
+        if low < high:
+            p = partition(raster, low, high)
+            quicksort(raster, low, p)
+            quicksort(raster, p + 1, high)
+
+
+    for i in range(1, len(raster)):
+        tmp = raster[i]
+        j = i
+        while j > 0 and tmp < raster[j-1]:
+            raster[j] = raster[j-1]
+            j -= 1
+        raster[j] = tmp
+    return raster
+
+def partition(raster, low, high):
+    #median of three
+    pivotArray = []
+    pivotArray.append(raster[low])
+    pivotArray.append(raster[high-1])
+    pivotArray.append(raster[(low+high)//2])
+    sorted(pivotArray)
+    pivot = pivotArray[1]
+
+    for i in range(low, high):
+        if raster[i] > pivot:
+            high += 1
+        else:
+            high += 1
+            low += 1
+            buff = raster[i]
+            raster[i] = raster[low-1]
+            raster[low-1] = buff
+    return low - 1
+'''
